@@ -12,12 +12,19 @@ public class TCPClient {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))
         ) {
-            String messageToSent = keyboard.readLine();
-            writer.write(messageToSent);
-            System.out.println(reader.readLine());
-
+            String messageToSent;
+            while (true) {
+                if(keyboard.ready()){
+                    messageToSent = keyboard.readLine();
+                    writer.write(messageToSent + "\n");
+                    writer.flush();
+                }
+                if (reader.ready()) {
+                    System.out.println(reader.readLine());
+                }
+            }
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
         }
     }
 }
