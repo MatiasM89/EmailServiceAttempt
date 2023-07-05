@@ -14,8 +14,11 @@ public class TCPClient {
         ) {
             String messageToSent;
             while (true) {
-                if(keyboard.ready()){
+                if (keyboard.ready()) {
                     messageToSent = keyboard.readLine();
+                    if (messageToSent.contains("exit") && messageToSent.length() == 4) {
+                        break;
+                    }
                     writer.write(messageToSent + "\n");
                     writer.flush();
                 }

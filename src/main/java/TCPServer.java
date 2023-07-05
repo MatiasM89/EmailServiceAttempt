@@ -7,16 +7,11 @@ public class TCPServer {
 
         try (
                 ServerSocket serverSocket = new ServerSocket(portNumber);
-                Socket socket = serverSocket.accept();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))
         ) {
             while (true) {
-                String message;
-                while ((message = reader.readLine()) != null) {
-                    writer.write(message + "\n");
-                    writer.flush();
-                }
+                Socket socket = serverSocket.accept();
+                System.out.println("Connected to the server " + socket.getInetAddress());
+                new Thread(new ThreadedServer(socket)).start();
             }
         } catch (IOException e) {
             System.out.println(e.getStackTrace());
