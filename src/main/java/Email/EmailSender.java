@@ -9,8 +9,8 @@ public class EmailSender {
     public static void main(String[] args) {
 
         String senderEmailAddress = "panboleslaw89@gmail.com";
-        String senderEmailPassword = "Arab21$%";
-        String recieveEmailAddress = "mati.matias09@gmail.com";
+        String senderEmailPassword = "etnirlgtwwmrqnpq";
+        String recieveEmailAddress = "michal.kosc20@gmail.com";
 
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
@@ -30,8 +30,14 @@ public class EmailSender {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(senderEmailAddress));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recieveEmailAddress));
+            message.setSubject("pedale");
+            message.setText("chuj ci na pizde");
+
+            Transport.send(message);
+            System.out.println("should send");
+
         } catch (MessagingException e) {
-            System.out.println("Exception with SenderAddress");
+            System.out.println(e.getMessage());
         }
 
     }
