@@ -8,9 +8,9 @@ import java.util.Properties;
 public class EmailSender {
     public static void main(String[] args) {
 
-        String senderEmailAddress = "panboleslaw89@gmail.com";
-        String senderEmailPassword = "Arab21$%";
-        String recieveEmailAddress = "mati.matias09@gmail.com";
+        String senderEmailAddress = "sender@gmail.com";
+        String senderEmailPassword = "password";
+        String recieveEmailAddress = "reciever@gmail.com";
 
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
