@@ -4,11 +4,11 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppFXTest.LoginPageController">
+<AnchorPane fx:id="MainLoginPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppFXTest.LoginPageController">
    <children>
       <PasswordField fx:id="passwordInput" layoutX="210.0" layoutY="209.0" />
       <TextField fx:id="emailInput" layoutX="210.0" layoutY="160.0" />
-      <Button layoutX="210.0" layoutY="264.0" mnemonicParsing="false" onAction="#signUp" prefHeight="25.0" prefWidth="149.0" text=" SIGN IN" />
+      <Button fx:id="SIGN_IN" layoutX="210.0" layoutY="250.0" mnemonicParsing="false" onAction="#signUp" prefHeight="25.0" prefWidth="149.0" text=" SIGN IN" />
       <Label layoutX="210.0" layoutY="143.0" prefHeight="17.0" prefWidth="57.0" text="Email" />
       <Label layoutX="210.0" layoutY="192.0" prefHeight="17.0" prefWidth="57.0" text="Password" />
       <ImageView fitHeight="51.0" fitWidth="66.0" layoutX="259.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
