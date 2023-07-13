@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="mainPageAnchor" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppFXTest.MainPageController">
    <children>
-      <Rectangle fx:id="leftRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="750.0" stroke="BLACK" strokeType="INSIDE" width="185.0" />
+      <Rectangle fx:id="leftRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="750.0" stroke="BLACK" strokeType="INSIDE" width="187.0" />
       <ImageView fitHeight="102.0" fitWidth="120.0" layoutX="42.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@EmailPNG.png" />
@@ -18,13 +18,118 @@
             <TextField prefHeight="34.0" prefWidth="485.0" promptText="search everything" />
          </children>
       </HBox>
-      <ListView layoutX="211.0" layoutY="151.0" prefHeight="522.0" prefWidth="173.0" />
-      <Button layoutX="42.0" layoutY="151.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="102.0" text="Button" />
-      <TextArea layoutX="410.0" layoutY="151.0" prefHeight="522.0" prefWidth="485.0" />
+      <Button fx:id="Send" layoutX="53.0" layoutY="148.0" mnemonicParsing="false" onAction="#sendButton" prefHeight="46.0" prefWidth="81.0" text="Send">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
       <Label fx:id="emailerLabel" layoutX="263.0" layoutY="25.0" prefHeight="34.0" prefWidth="128.0" text="Emailer!">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <VBox layoutX="410.0" layoutY="464.0" prefHeight="209.0" prefWidth="624.0">
+         <children>
+            <HBox prefHeight="33.0" prefWidth="624.0">
+               <children>
+                  <TextField fx:id="emailTo" prefHeight="33.0" prefWidth="338.0" promptText="To:" />
+                  <TextField fx:id="emailSubject" prefHeight="33.0" prefWidth="356.0" promptText="Subject:" />
+               </children>
+            </HBox>
+            <TextArea fx:id="emailBody" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+      <Label fx:id="selectedMailText" layoutX="406.0" layoutY="158.0" prefHeight="283.0" prefWidth="624.0" textFill="WHITE" />
+      <VBox layoutX="204.0" layoutY="158.0" prefHeight="515.0" prefWidth="187.0">
+         <children>
+            <VBox prefHeight="65.0" prefWidth="187.0">
+               <children>
+                  <HBox prefHeight="29.0" prefWidth="187.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="212.0" text="Label" />
+                        <Label prefHeight="17.0" prefWidth="160.0" text="Label" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="43.0" prefWidth="187.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="65.0" prefWidth="187.0">
+               <children>
+                  <HBox prefHeight="29.0" prefWidth="187.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="212.0" text="Label" />
+                        <Label prefHeight="17.0" prefWidth="160.0" text="Label" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="43.0" prefWidth="187.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="75.0" prefHeight="65.0" prefWidth="187.0">
+               <children>
+                  <HBox prefHeight="29.0" prefWidth="187.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="212.0" text="Label" />
+                        <Label prefHeight="17.0" prefWidth="160.0" text="Label" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="43.0" prefWidth="187.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="140.0" prefHeight="65.0" prefWidth="187.0">
+               <children>
+                  <HBox prefHeight="29.0" prefWidth="187.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="212.0" text="Label" />
+                        <Label prefHeight="17.0" prefWidth="160.0" text="Label" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="43.0" prefWidth="187.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="205.0" prefHeight="65.0" prefWidth="187.0">
+               <children>
+                  <HBox prefHeight="29.0" prefWidth="187.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="212.0" text="Label" />
+                        <Label prefHeight="17.0" prefWidth="160.0" text="Label" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="43.0" prefWidth="187.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="270.0" prefHeight="65.0" prefWidth="187.0">
+               <children>
+                  <HBox prefHeight="29.0" prefWidth="187.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="212.0" text="Label" />
+                        <Label prefHeight="17.0" prefWidth="160.0" text="Label" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="43.0" prefWidth="187.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="335.0" prefHeight="65.0" prefWidth="187.0">
+               <children>
+                  <HBox prefHeight="29.0" prefWidth="187.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="212.0" text="Label" />
+                        <Label prefHeight="17.0" prefWidth="160.0" text="Label" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="43.0" prefWidth="187.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="400.0" prefHeight="65.0" prefWidth="187.0">
+               <children>
+                  <HBox prefHeight="29.0" prefWidth="187.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="212.0" text="Label" />
+                        <Label prefHeight="17.0" prefWidth="160.0" text="Label" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="43.0" prefWidth="187.0" text="Label" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

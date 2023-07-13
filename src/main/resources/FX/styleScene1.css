@@ -1,15 +1,15 @@
 #SIGN_IN{
     -fx-font-family: "Open Sans";
     -fx-font-size: 12;
-    -fx-background-color: #FFCE5C;
+    -fx-background-color: #B9B8D3;
     -fx-background-radius: 6;
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
 }
 #SIGN_IN:hover{
-    -fx-background-color: #FFC847;
+    -fx-background-color: #8F8EB8;
 }
 #MainLoginPane{
-    -fx-background-color: rgba(255, 237, 194, 0.5);
+    -fx-background-color: #DEF7E7;
 
 }

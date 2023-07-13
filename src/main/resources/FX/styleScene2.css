@@ -1,12 +1,28 @@
 #leftRectangle{
-    -fx-fill: #FFD470;
+    -fx-fill: #CDCDE0;
 }
 #mainPageAnchor{
-    -fx-background-color: rgba(255, 237, 194, 0.5);
+    //-fx-background-color: rgba(255, 237, 194, 0.5);
+    -fx-background-color: #CEF3DC;
+}
+#selectedMailText{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
 }
 #emailerLabel{
         -fx-font-family: "Open Sans";
         -fx-font-size: 18;
         -fx-font-weight: bold;
 
+}
+#Send:hover{
+    -fx-background-color: #B5B4D0;
+}
+#Send{
+    -fx-background-color: #ADEBC5;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
 }
