@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="mainPageAnchor" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppFXTest.MainPageController">
+   <children>
+      <Rectangle fx:id="leftRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="750.0" stroke="BLACK" strokeType="INSIDE" width="185.0" />
+      <ImageView fitHeight="102.0" fitWidth="120.0" layoutX="42.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@EmailPNG.png" />
+         </image></ImageView>
+      <HBox layoutX="263.0" layoutY="59.0" prefHeight="34.0" prefWidth="514.0">
+         <children>
+            <TextField prefHeight="34.0" prefWidth="485.0" promptText="search everything" />
+         </children>
+      </HBox>
+      <ListView layoutX="211.0" layoutY="151.0" prefHeight="522.0" prefWidth="173.0" />
+      <Button layoutX="42.0" layoutY="151.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="102.0" text="Button" />
+      <TextArea layoutX="410.0" layoutY="151.0" prefHeight="522.0" prefWidth="485.0" />
+      <Label fx:id="emailerLabel" layoutX="263.0" layoutY="25.0" prefHeight="34.0" prefWidth="128.0" text="Emailer!">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
