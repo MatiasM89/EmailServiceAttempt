@@ -11,11 +11,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Store;
+import javax.mail.*;
+import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 public class LoginPageController {
@@ -33,7 +34,8 @@ public class LoginPageController {
     public void signUp(ActionEvent event) throws IOException {
         String emailAddress = emailInput.getText();
         String password = passwordInput.getText();
-        // login part
+        List<Message> messages;
+
         Properties properties = new Properties();
         properties.put("mail.pop3.host", "pop.gmail.com");
         properties.put("mail.pop3.port", "995");
@@ -43,6 +45,10 @@ public class LoginPageController {
             Session session = Session.getDefaultInstance(properties);
             Store storage = session.getStore("pop3s");
             storage.connect("pop.gmail.com", emailAddress, password);
+            Folder emailFolder = storage.getFolder("INBOX");
+            emailFolder.open(1); //read-only
+            messages = new ArrayList<>(Arrays.asList(emailFolder.getMessages()));
+
         } catch (NoSuchProviderException e) {
             System.out.println(e.getMessage());
             return;
@@ -50,9 +56,29 @@ public class LoginPageController {
             credentialsLabel.setVisible(true);
             return;
         }
-
         credentialsLabel.setVisible(false);
-        root = FXMLLoader.load(getClass().getResource("/FX/MainPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FX/MainPage.fxml"));
+        root = loader.load();
+
+        MainPageController mainPageController = loader.getController();
+        mainPageController.emailAddress = emailAddress;
+        mainPageController.password = password;
+        try {
+            Message msg = messages.get(250);
+            Object content = msg.getContent();
+            MimeMultipart multipart = (MimeMultipart) content;
+            int count = multipart.getCount();
+            for (int i = 0; i < count; i++) {
+                BodyPart bodyPart = multipart.getBodyPart(i);
+                if (bodyPart.isMimeType("text/plain")) {
+                    mainPageController.selectedMailText.setText(bodyPart.getContent().toString());
+                }
+            }
+            mainPageController.labelDown.setText(msg.getSubject());
+        } catch (MessagingException e) {
+
+        }
+
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/FX/styleScene2.css").toExternalForm());

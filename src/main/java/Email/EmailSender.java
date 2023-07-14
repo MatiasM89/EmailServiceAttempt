@@ -16,7 +16,7 @@ public class EmailSender {
         properties.put("mail.smtp.user", senderEmailAddress);
         properties.put("mail.smtp.password", senderEmailPassword);
 
-        Session session = Session.getDefaultInstance(properties, new Authenticator() {
+        Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(senderEmailAddress, senderEmailPassword);
             }
