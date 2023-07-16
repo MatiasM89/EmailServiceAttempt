@@ -27,7 +27,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <VBox layoutX="410.0" layoutY="459.0" prefHeight="210.0" prefWidth="624.0">
+      <VBox layoutX="494.0" layoutY="463.0" prefHeight="210.0" prefWidth="624.0">
          <children>
             <HBox prefHeight="33.0" prefWidth="624.0">
                <children>
@@ -38,14 +38,14 @@
             <TextArea fx:id="emailBody" prefHeight="200.0" prefWidth="200.0" promptText="Write your email here!" />
          </children>
       </VBox>
-      <VBox layoutX="204.0" layoutY="158.0" prefHeight="515.0" prefWidth="187.0">
+      <VBox layoutX="204.0" layoutY="158.0" prefHeight="515.0" prefWidth="270.0" spacing="8.0">
          <children>
             <VBox prefHeight="73.0" prefWidth="189.0">
                <children>
                   <HBox prefHeight="32.0" prefWidth="187.0">
                      <children>
-                        <TextField fx:id="address1" prefHeight="32.0" prefWidth="131.0" />
-                        <TextField fx:id="date1" prefHeight="33.0" prefWidth="66.0" />
+                        <TextField fx:id="address1" prefHeight="29.0" prefWidth="240.0" />
+                        <TextField fx:id="date1" prefHeight="29.0" prefWidth="126.0" />
                      </children>
                   </HBox>
                   <TextField fx:id="sub1" prefHeight="40.0" prefWidth="187.0" />
@@ -55,8 +55,8 @@
                <children>
                   <HBox prefHeight="32.0" prefWidth="187.0">
                      <children>
-                        <TextField fx:id="address2" prefHeight="32.0" prefWidth="131.0" />
-                        <TextField fx:id="date2" prefHeight="33.0" prefWidth="66.0" />
+                        <TextField fx:id="address2" prefHeight="29.0" prefWidth="227.0" />
+                        <TextField fx:id="date2" prefHeight="29.0" prefWidth="112.0" />
                      </children>
                   </HBox>
                   <TextField fx:id="sub2" prefHeight="40.0" prefWidth="187.0" />
@@ -66,8 +66,8 @@
                <children>
                   <HBox prefHeight="32.0" prefWidth="187.0">
                      <children>
-                        <TextField fx:id="address3" prefHeight="32.0" prefWidth="131.0" />
-                        <TextField fx:id="date3" prefHeight="33.0" prefWidth="66.0" />
+                        <TextField fx:id="address3" prefHeight="30.0" prefWidth="240.0" />
+                        <TextField fx:id="date3" prefHeight="30.0" prefWidth="126.0" />
                      </children>
                   </HBox>
                   <TextField fx:id="sub3" prefHeight="40.0" prefWidth="187.0" />
@@ -77,8 +77,8 @@
                <children>
                   <HBox prefHeight="32.0" prefWidth="187.0">
                      <children>
-                        <TextField fx:id="address4" prefHeight="32.0" prefWidth="131.0" />
-                        <TextField fx:id="date4" prefHeight="33.0" prefWidth="66.0" />
+                        <TextField fx:id="address4" prefHeight="30.0" prefWidth="240.0" />
+                        <TextField fx:id="date4" prefHeight="30.0" prefWidth="126.0" />
                      </children>
                   </HBox>
                   <TextField fx:id="sub4" prefHeight="40.0" prefWidth="187.0" />
@@ -88,8 +88,8 @@
                <children>
                   <HBox prefHeight="32.0" prefWidth="187.0">
                      <children>
-                        <TextField fx:id="address5" prefHeight="32.0" prefWidth="131.0" />
-                        <TextField fx:id="date5" prefHeight="33.0" prefWidth="66.0" />
+                        <TextField fx:id="address5" prefHeight="30.0" prefWidth="243.0" />
+                        <TextField fx:id="date5" prefHeight="30.0" prefWidth="126.0" />
                      </children>
                   </HBox>
                   <TextField fx:id="sub5" prefHeight="40.0" prefWidth="187.0" />
@@ -99,8 +99,8 @@
                <children>
                   <HBox prefHeight="32.0" prefWidth="187.0">
                      <children>
-                        <TextField fx:id="address6" prefHeight="32.0" prefWidth="131.0" />
-                        <TextField fx:id="date6" prefHeight="33.0" prefWidth="66.0" />
+                        <TextField fx:id="address6" prefHeight="30.0" prefWidth="240.0" />
+                        <TextField fx:id="date6" prefHeight="30.0" prefWidth="126.0" />
                      </children>
                   </HBox>
                   <TextField fx:id="sub6" prefHeight="40.0" prefWidth="187.0" />
@@ -110,8 +110,8 @@
                <children>
                   <HBox prefHeight="32.0" prefWidth="187.0">
                      <children>
-                        <TextField fx:id="address7" prefHeight="32.0" prefWidth="131.0" />
-                        <TextField fx:id="date7" prefHeight="33.0" prefWidth="66.0" />
+                        <TextField fx:id="address7" prefHeight="30.0" prefWidth="240.0" />
+                        <TextField fx:id="date7" prefHeight="30.0" prefWidth="126.0" />
                      </children>
                   </HBox>
                   <TextField fx:id="sub7" prefHeight="40.0" prefWidth="187.0" />
@@ -123,7 +123,7 @@
          <font>
             <Font size="16.0" />
          </font></Button>
-      <VBox layoutX="408.0" layoutY="158.0" prefHeight="285.0" prefWidth="624.0">
+      <VBox layoutX="494.0" layoutY="158.0" prefHeight="285.0" prefWidth="624.0">
          <children>
             <TextField fx:id="from" editable="false" promptText="From:" />
             <TextField fx:id="subject" editable="false" promptText="Subject:" />

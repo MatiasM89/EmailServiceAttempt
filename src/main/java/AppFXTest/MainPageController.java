@@ -3,17 +3,15 @@ package AppFXTest;
 import Email.EmailSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MainPageController {
@@ -46,9 +44,6 @@ public class MainPageController {
     private TextField address6, date6, sub6;
     @FXML
     private TextField address7, date7, sub7;
-
-
-
 
     public void logout(ActionEvent event){
         FXRun fxRun = new FXRun();
@@ -104,7 +99,6 @@ public class MainPageController {
 
         } catch (MessagingException e) {
             System.out.println("Failed to extract message information.");
-            e.printStackTrace();
         }
     }
 
@@ -117,7 +111,10 @@ public class MainPageController {
     }
 
     private String getSentDateAsString(Message message) throws MessagingException {
-        return message.getSentDate().toString();
+        String format = "dd/MM/yyyy";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        Date date = message.getSentDate();
+        return dateFormat.format(date);
     }
 
 }
