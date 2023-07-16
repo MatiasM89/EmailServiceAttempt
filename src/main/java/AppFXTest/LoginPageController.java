@@ -64,7 +64,7 @@ public class LoginPageController {
         mainPageController.emailAddress = emailAddress;
         mainPageController.password = password;
         try {
-            Message msg = messages.get(250);
+            Message msg = messages.get(0);
             Object content = msg.getContent();
             MimeMultipart multipart = (MimeMultipart) content;
             int count = multipart.getCount();
@@ -75,6 +75,7 @@ public class LoginPageController {
                 }
             }
             mainPageController.subject.setText(msg.getSubject());
+            mainPageController.populateFields(messages);
         } catch (MessagingException e) {
             System.out.println("message show");
         }
