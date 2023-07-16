@@ -4,9 +4,11 @@ import Email.EmailSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class MainPageController {
     @FXML
@@ -16,13 +18,22 @@ public class MainPageController {
     @FXML
     private TextField emailSubject;
     @FXML
-    public Label labelUp;
+    public TextField subject;
     @FXML
-    public Label labelDown;
+    public TextField from;
     @FXML
-    public Label selectedMailText;
+    public TextArea selectedMailText;
     public String emailAddress;
     public String password;
+
+    public void logout(ActionEvent event){
+        FXRun fxRun = new FXRun();
+        try{
+            fxRun.start(new Stage());
+        }catch (Exception e){
+            return;
+        }
+    }
 
     public void sendButton(ActionEvent event) {
         new Thread(() -> {

@@ -27,7 +27,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <VBox layoutX="410.0" layoutY="464.0" prefHeight="209.0" prefWidth="624.0">
+      <VBox layoutX="410.0" layoutY="459.0" prefHeight="214.0" prefWidth="624.0">
          <children>
             <HBox prefHeight="33.0" prefWidth="624.0">
                <children>
@@ -130,15 +130,19 @@
             </VBox>
          </children>
       </VBox>
-      <Button fx:id="logout" layoutX="57.0" layoutY="685.0" mnemonicParsing="false" text="Logout">
+      <Button fx:id="logout" layoutX="57.0" layoutY="685.0" mnemonicParsing="false" onAction="#logout" text="Logout">
          <font>
             <Font size="16.0" />
          </font></Button>
-      <VBox fx:id="vbox2" layoutX="410.0" layoutY="158.0" prefHeight="286.0" prefWidth="624.0">
+      <VBox layoutX="408.0" layoutY="158.0" prefHeight="285.0" prefWidth="624.0">
          <children>
-            <Label fx:id="labelUp" prefHeight="26.0" prefWidth="624.0" text="Label" />
-            <Label fx:id="labelDown" prefHeight="26.0" prefWidth="624.0" text="Label" />
-            <Label fx:id="selectedMailText" prefHeight="235.0" prefWidth="624.0" />
+            <TextField fx:id="from" editable="false" promptText="From:" />
+            <TextField fx:id="subject" editable="false" promptText="Subject:" />
+            <ScrollPane fx:id="scrollPane1" prefHeight="261.0" prefWidth="620.0">
+               <content>
+                  <TextArea fx:id="selectedMailText" editable="false" prefHeight="233.0" prefWidth="622.0" />
+               </content>
+            </ScrollPane>
          </children>
       </VBox>
    </children>

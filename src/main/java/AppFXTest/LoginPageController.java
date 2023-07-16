@@ -74,9 +74,9 @@ public class LoginPageController {
                     mainPageController.selectedMailText.setText(bodyPart.getContent().toString());
                 }
             }
-            mainPageController.labelDown.setText(msg.getSubject());
+            mainPageController.subject.setText(msg.getSubject());
         } catch (MessagingException e) {
-
+            System.out.println("message show");
         }
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

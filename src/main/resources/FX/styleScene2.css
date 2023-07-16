@@ -19,9 +19,8 @@
 }
 #selectedMailText{
     -fx-background-color: #ffffff;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
+    -fx-border-radius: 0px;
+    -fx-border-color: #ffffff;
 }
 #emailerLabel{
         -fx-font-family: "Open Sans";
@@ -46,16 +45,4 @@
 }
 #vbox2{
     -fx-background-color: #ffffff;
-}
-#labelUp{
-    -fx-text-fill: #c0c0c0;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 0px;
-}
-#labelDown{
-    -fx-text-fill: #c0c0c0;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 0px;
 }
