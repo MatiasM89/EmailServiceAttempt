@@ -1,10 +1,8 @@
 package Email;
 
 import javax.mail.*;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
-import java.util.ArrayList;
+
 
 public class EmailViewer {
     public static Folder receiveMail(String EmailAddress, String EmailPassword, String hostNameAddress) throws Exception {

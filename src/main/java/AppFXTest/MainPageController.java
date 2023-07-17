@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import javax.mail.Address;
@@ -14,10 +15,13 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class MainPageController {
+
+
     @FXML
     private TextArea emailBody;
     @FXML
@@ -32,7 +36,8 @@ public class MainPageController {
     public TextArea selectedMailText;
     public String emailAddress;
     public String password;
-
+    int index;
+    List<Message> listOfMessages;
     @FXML
     private TextField address1, date1, sub1;
     @FXML
@@ -63,44 +68,59 @@ public class MainPageController {
         }).start();
     }
 
-    public void populateFields(List<Message> messages) {
+    public void populateFields(List<Message> messages, int index) {
+        this.index = index;
+        listOfMessages = new ArrayList<>();
         try {
-            Message message1 = messages.get(messages.size()-2);
+            Message message1 = messages.get(index - 2);
             address1.setText(getSenderEmailAddress(message1));
             date1.setText(getSentDateAsString(message1));
             sub1.setText(message1.getSubject());
+            listOfMessages.add(message1);
 
-            Message message2 = messages.get(messages.size()-3);
+            Message message2 = messages.get(index - 3);
+
             address2.setText(getSenderEmailAddress(message2));
             date2.setText(getSentDateAsString(message2));
             sub2.setText(message2.getSubject());
+            listOfMessages.add(message2);
 
-            Message message3 = messages.get(messages.size()-4);
+            Message message3 = messages.get(index - 4);
+
             address3.setText(getSenderEmailAddress(message3));
             date3.setText(getSentDateAsString(message3));
             sub3.setText(message3.getSubject());
+            listOfMessages.add(message3);
 
-            Message message4 = messages.get(messages.size()-5);
+            Message message4 = messages.get(index - 5);
+
             address4.setText(getSenderEmailAddress(message4));
             date4.setText(getSentDateAsString(message4));
             sub4.setText(message4.getSubject());
+            listOfMessages.add(message4);
 
-            Message message5 = messages.get(messages.size()-6);
+            Message message5 = messages.get(index - 6);
+
             address5.setText(getSenderEmailAddress(message5));
             date5.setText(getSentDateAsString(message5));
             sub5.setText(message5.getSubject());
+            listOfMessages.add(message5);
 
-            Message message6 = messages.get(messages.size()-7);
+            Message message6 = messages.get(index - 7);
+
             address6.setText(getSenderEmailAddress(message6));
             date6.setText(getSentDateAsString(message6));
             sub6.setText(message6.getSubject());
+            listOfMessages.add(message6);
 
-            Message message7 = messages.get(messages.size()-8);
+            Message message7 = messages.get(index - 8);
+
             address7.setText(getSenderEmailAddress(message7));
             date7.setText(getSentDateAsString(message7));
             sub7.setText(message7.getSubject());
+            listOfMessages.add(message7);
 
-            Message msg = messages.get(messages.size()-1);
+            Message msg = messages.get(index - 1);
             Object content = msg.getContent();
             MimeMultipart multipart = (MimeMultipart) content;
             int count = multipart.getCount();
@@ -113,6 +133,13 @@ public class MainPageController {
             subject.setText(msg.getSubject());
             from.setText(getSenderEmailAddress(msg));
 
+            address1.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
+            address2.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
+            address3.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
+            address4.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
+            address5.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
+            address6.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
+            address7.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
 
         } catch (MessagingException | IOException e) {
             System.out.println("Failed to extract message information.");
@@ -132,6 +159,35 @@ public class MainPageController {
         SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         Date date = message.getSentDate();
         return dateFormat.format(date);
+    }
+
+    private int getIndexFromTextField(TextField textField) {
+        String id = textField.getId();
+        String indexStr = id.substring(id.length() - 1);
+        return Integer.parseInt(indexStr);
+    }
+
+
+    public void clickHeader(MouseEvent event) {
+        TextField sourceTextField = (TextField) event.getSource();
+        int index = getIndexFromTextField(sourceTextField);
+        Message msg = listOfMessages.get(index - 1);
+        try {
+            Object content = msg.getContent();
+            MimeMultipart multipart = (MimeMultipart) content;
+            int count = multipart.getCount();
+            for (int i = 0; i < count; i++) {
+                BodyPart bodyPart = multipart.getBodyPart(i);
+                if (bodyPart.isMimeType("text/plain")) {
+                    selectedMailText.setText(bodyPart.getContent().toString());
+                }
+            }
+            subject.setText(msg.getSubject());
+            from.setText(getSenderEmailAddress(msg));
+        }catch (Exception e){
+            System.out.println("error swaping main mail");
+        }
+
     }
 
 }

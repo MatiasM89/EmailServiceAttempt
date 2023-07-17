@@ -37,9 +37,8 @@ public class LoginPageController {
 
         try {
             Folder emailFolder = EmailViewer.receiveMail(emailAddress, password, "smtp.gmail.com");
-            emailFolder.open(1); //read-only
+            emailFolder.open(Folder.READ_ONLY);
             messages = new ArrayList<>(Arrays.asList(emailFolder.getMessages()));
-            //emailFolder.close();
 
         } catch (NoSuchProviderException e) {
             System.out.println(e.getMessage());
@@ -60,7 +59,7 @@ public class LoginPageController {
         MainPageController mainPageController = loader.getController();
         mainPageController.emailAddress = emailAddress;
         mainPageController.password = password;
-        mainPageController.populateFields(messages);
+        mainPageController.populateFields(messages, messages.size()-1);
 
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
