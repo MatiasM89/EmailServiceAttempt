@@ -1,39 +1,26 @@
 package Email;
 
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Store;
+import javax.mail.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.ArrayList;
 
 public class EmailViewer {
-    public static void receiveMail(String EmailAddress, String EmailPassword, String hostNameAddress) {
+    public static Folder receiveMail(String EmailAddress, String EmailPassword, String hostNameAddress) throws Exception {
         Properties properties = new Properties();
-        properties.put("mail.pop3.host", hostNameAddress);
-        properties.put("mail.pop3.port", "995");
-        properties.put("mail.pop3.ssl.enable", "true");
-        properties.put("mail.protocol.store", "pop3");
+        properties.put("mail.imap.host", hostNameAddress);
+        properties.put("mail.imap.port", "993");
+        properties.put("mail.imap.ssl.enable", "true");
 
-        Session session = Session.getDefaultInstance(properties);
-        try {
-            Store storage = session.getStore("pop3s");
-            storage.connect(hostNameAddress, EmailAddress, EmailPassword);
-            Folder emailFolder = storage.getFolder("INBOX");
-            emailFolder.open(1); //read-only
-            List<Message> messages = new ArrayList<>(Arrays.asList(emailFolder.getMessages()));
-            for(Message msg : messages){
-                System.out.println(msg.getSubject());
+        Session session = Session.getInstance(properties, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(EmailAddress, EmailPassword);
             }
+        });
+        Store storage = session.getStore("imap");
+        storage.connect(hostNameAddress, EmailAddress, EmailPassword);
 
-            storage.close();
-            emailFolder.close();
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
+        return storage.getFolder("INBOX");
     }
 }

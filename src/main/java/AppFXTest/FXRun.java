@@ -11,15 +11,12 @@ import javafx.stage.Stage;
 public class FXRun extends Application {
 
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/FX/FXRun.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FX/LoginPage.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/FX/styleScene1.css").toExternalForm());
         Image appIcon = new Image("/FX/EmailPNG.png");
 
-
-        stage.setWidth(1200);
-        stage.setHeight(750);
         stage.setResizable(false);
-
         stage.getIcons().add(appIcon);
         stage.setTitle("Emailer!");
         stage.setScene(scene);
