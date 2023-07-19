@@ -37,7 +37,7 @@ public class MainPageController {
     public String emailAddress;
     public String password;
     int index;
-    List<Message> listOfMessages;
+    public List<Message> listOfMessages;
     @FXML
     private TextField address1, date1, sub1;
     @FXML
@@ -68,70 +68,61 @@ public class MainPageController {
         }).start();
     }
 
-    public void populateFields(List<Message> messages, int index) {
+    public void populateFields( int index) {
+        System.out.println(listOfMessages.size()+" "+index);
+
+        if (index > listOfMessages.size()) {
+            return;
+        }
         this.index = index;
-        listOfMessages = new ArrayList<>();
         try {
-            Message message1 = messages.get(index - 2);
+            Message message1 = listOfMessages.get(index - 2);
             address1.setText(getSenderEmailAddress(message1));
             date1.setText(getSentDateAsString(message1));
             sub1.setText(message1.getSubject());
-            listOfMessages.add(message1);
 
-            Message message2 = messages.get(index - 3);
+
+            Message message2 = listOfMessages.get(index - 3);
 
             address2.setText(getSenderEmailAddress(message2));
             date2.setText(getSentDateAsString(message2));
             sub2.setText(message2.getSubject());
-            listOfMessages.add(message2);
 
-            Message message3 = messages.get(index - 4);
+
+            Message message3 = listOfMessages.get(index - 4);
 
             address3.setText(getSenderEmailAddress(message3));
             date3.setText(getSentDateAsString(message3));
             sub3.setText(message3.getSubject());
-            listOfMessages.add(message3);
 
-            Message message4 = messages.get(index - 5);
+
+            Message message4 = listOfMessages.get(index - 5);
 
             address4.setText(getSenderEmailAddress(message4));
             date4.setText(getSentDateAsString(message4));
             sub4.setText(message4.getSubject());
-            listOfMessages.add(message4);
 
-            Message message5 = messages.get(index - 6);
+
+            Message message5 = listOfMessages.get(index - 6);
 
             address5.setText(getSenderEmailAddress(message5));
             date5.setText(getSentDateAsString(message5));
             sub5.setText(message5.getSubject());
-            listOfMessages.add(message5);
 
-            Message message6 = messages.get(index - 7);
+
+            Message message6 = listOfMessages.get(index - 7);
 
             address6.setText(getSenderEmailAddress(message6));
             date6.setText(getSentDateAsString(message6));
             sub6.setText(message6.getSubject());
-            listOfMessages.add(message6);
 
-            Message message7 = messages.get(index - 8);
+
+            Message message7 = listOfMessages.get(index - 8);
 
             address7.setText(getSenderEmailAddress(message7));
             date7.setText(getSentDateAsString(message7));
             sub7.setText(message7.getSubject());
-            listOfMessages.add(message7);
 
-            Message msg = messages.get(index - 1);
-            Object content = msg.getContent();
-            MimeMultipart multipart = (MimeMultipart) content;
-            int count = multipart.getCount();
-            for (int i = 0; i < count; i++) {
-                BodyPart bodyPart = multipart.getBodyPart(i);
-                if (bodyPart.isMimeType("text/plain")) {
-                    selectedMailText.setText(bodyPart.getContent().toString());
-                }
-            }
-            subject.setText(msg.getSubject());
-            from.setText(getSenderEmailAddress(msg));
 
             address1.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
             address2.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
@@ -141,9 +132,39 @@ public class MainPageController {
             address6.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
             address7.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
 
-        } catch (MessagingException | IOException e) {
+        } catch (MessagingException e) {
             System.out.println("Failed to extract message information.");
         }
+    }
+    public void makeMessageVisible(int index) {
+        Message msg = listOfMessages.get(index - 1);
+        try {
+            Object content = msg.getContent();
+            if (content instanceof MimeMultipart) {
+                MimeMultipart multipart = (MimeMultipart) content;
+                int count = multipart.getCount();
+                for (int i = 0; i < count; i++) {
+                    BodyPart bodyPart = multipart.getBodyPart(i);
+                    if (bodyPart.isMimeType("text/plain")) {
+                        selectedMailText.setText(bodyPart.getContent().toString());
+                    }
+                }
+            } else if (content instanceof String) {
+                selectedMailText.setText((String) content);
+            }
+            subject.setText(msg.getSubject());
+            from.setText(getSenderEmailAddress(msg));
+        }catch (Exception e){
+            System.out.println("Exception when making message visible");
+        }
+    }
+
+    public void scrollRight(ActionEvent e) {
+        populateFields(index - 7);
+    }
+
+    public void scrollLeft(ActionEvent e) {
+        populateFields(index + 7);
     }
 
     private String getSenderEmailAddress(Message message) throws MessagingException {
@@ -170,24 +191,8 @@ public class MainPageController {
 
     public void clickHeader(MouseEvent event) {
         TextField sourceTextField = (TextField) event.getSource();
-        int index = getIndexFromTextField(sourceTextField);
-        Message msg = listOfMessages.get(index - 1);
-        try {
-            Object content = msg.getContent();
-            MimeMultipart multipart = (MimeMultipart) content;
-            int count = multipart.getCount();
-            for (int i = 0; i < count; i++) {
-                BodyPart bodyPart = multipart.getBodyPart(i);
-                if (bodyPart.isMimeType("text/plain")) {
-                    selectedMailText.setText(bodyPart.getContent().toString());
-                }
-            }
-            subject.setText(msg.getSubject());
-            from.setText(getSenderEmailAddress(msg));
-        }catch (Exception e){
-            System.out.println("error swaping main mail");
-        }
-
+        int j = getIndexFromTextField(sourceTextField);
+        makeMessageVisible(index-j);
     }
 
 }

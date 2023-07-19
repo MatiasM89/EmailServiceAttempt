@@ -59,7 +59,9 @@ public class LoginPageController {
         MainPageController mainPageController = loader.getController();
         mainPageController.emailAddress = emailAddress;
         mainPageController.password = password;
-        mainPageController.populateFields(messages, messages.size()-1);
+        mainPageController.listOfMessages = messages;
+        mainPageController.populateFields(messages.size()-1);
+        mainPageController.makeMessageVisible(mainPageController.index-1);
 
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
