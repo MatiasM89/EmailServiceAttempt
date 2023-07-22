@@ -42,6 +42,7 @@
 #selectedMailText{
     -fx-background-color: #ffffff;
     -fx-border-radius: 0px;
+    -fx-font-family: "Open Sans";
     -fx-border-color: #ffffff;
 }
 #emailerLabel{
@@ -50,16 +51,14 @@
         -fx-font-weight: bold;
 }
 #Send:hover{
-    -fx-background-color: #B5B4D0;
+    -fx-background-color: #CEF3DC;
+    -fx-font-size: 16;
 }
 #Send{
-    -fx-background-color: #ADEBC5;
-    -fx-border-color: #000000;
-    -fx-border-width: 1px;
+    -fx-font-family: "Open Sans";
+    -fx-font-weight: bold;
+    -fx-background-color: #CDCDE0;
     -fx-border-radius: 5px;
-}
-#selectedMailText{
-    -fx-border-radius: 0px;
 }
 #emailBody .textPrompt {
     -fx-alignment: center;

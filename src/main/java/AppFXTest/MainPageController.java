@@ -3,19 +3,18 @@ package AppFXTest;
 import Email.EmailSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import javax.mail.Address;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMultipart;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
@@ -54,22 +53,17 @@ public class MainPageController {
     private TextField address7, date7, sub7;
 
     public void logout(ActionEvent event) {
-        FXRun fxRun = new FXRun();
-        try {
-            fxRun.start(new Stage());
-        } catch (Exception e) {
-            return;
-        }
+
     }
 
-    public void sendButton(ActionEvent event) {
+    public void sendButton() {
         new Thread(() -> {
             EmailSender.sendEmail(emailAddress, password, emailTo.getText(), emailSubject.getText(), emailBody.getText());
         }).start();
     }
 
-    public void populateFields( int index) {
-        System.out.println(listOfMessages.size()+" "+index);
+    public void populateFields(int index) {
+        System.out.println(listOfMessages.size() + " " + index);
 
         if (index > listOfMessages.size()) {
             return;
@@ -77,6 +71,7 @@ public class MainPageController {
         this.index = index;
         try {
             Message message1 = listOfMessages.get(index - 2);
+
             address1.setText(getSenderEmailAddress(message1));
             date1.setText(getSentDateAsString(message1));
             sub1.setText(message1.getSubject());
@@ -123,19 +118,31 @@ public class MainPageController {
             date7.setText(getSentDateAsString(message7));
             sub7.setText(message7.getSubject());
 
+            setCursorsToPopulatedFields();
 
-            address1.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
-            address2.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
-            address3.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
-            address4.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
-            address5.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
-            address6.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
-            address7.setOnMouseClicked(mouseEvent -> clickHeader((MouseEvent) mouseEvent.getSource()));
+            sub1.setOnMouseClicked(this::clickHeader);
+            sub2.setOnMouseClicked(this::clickHeader);
+            sub3.setOnMouseClicked(this::clickHeader);
+            sub4.setOnMouseClicked(this::clickHeader);
+            sub5.setOnMouseClicked(this::clickHeader);
+            sub6.setOnMouseClicked(this::clickHeader);
+            sub7.setOnMouseClicked(this::clickHeader);
 
         } catch (MessagingException e) {
             System.out.println("Failed to extract message information.");
         }
     }
+
+    public void setCursorsToPopulatedFields() {
+        sub1.setCursor(Cursor.HAND);
+        sub2.setCursor(Cursor.HAND);
+        sub3.setCursor(Cursor.HAND);
+        sub4.setCursor(Cursor.HAND);
+        sub5.setCursor(Cursor.HAND);
+        sub6.setCursor(Cursor.HAND);
+        sub7.setCursor(Cursor.HAND);
+    }
+
     public void makeMessageVisible(int index) {
         Message msg = listOfMessages.get(index - 1);
         try {
@@ -154,7 +161,7 @@ public class MainPageController {
             }
             subject.setText(msg.getSubject());
             from.setText(getSenderEmailAddress(msg));
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Exception when making message visible");
         }
     }
@@ -192,7 +199,7 @@ public class MainPageController {
     public void clickHeader(MouseEvent event) {
         TextField sourceTextField = (TextField) event.getSource();
         int j = getIndexFromTextField(sourceTextField);
-        makeMessageVisible(index-j);
+        makeMessageVisible(index - j);
     }
 
 }
