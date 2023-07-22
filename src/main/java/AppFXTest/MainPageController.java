@@ -1,12 +1,17 @@
 package AppFXTest;
 
 import Email.EmailSender;
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import javax.mail.Address;
 import javax.mail.BodyPart;
@@ -32,6 +37,8 @@ public class MainPageController {
     @FXML
     public TextField from;
     @FXML
+    private Button logout;
+    @FXML
     public TextArea selectedMailText;
     public String emailAddress;
     public String password;
@@ -53,7 +60,16 @@ public class MainPageController {
     private TextField address7, date7, sub7;
 
     public void logout(ActionEvent event) {
+        Node sourceNode = (Node) event.getSource();
+        Stage currentStage = (Stage) sourceNode.getScene().getWindow();
+        currentStage.close();
 
+        FXRun fxRun = new FXRun();
+        try {
+            fxRun.start(new Stage());
+        } catch (Exception e) {
+            System.out.println("Error while restarting the application.");
+        }
     }
 
     public void sendButton() {
@@ -166,11 +182,11 @@ public class MainPageController {
         }
     }
 
-    public void scrollRight(ActionEvent e) {
+    public void scrollRight() {
         populateFields(index - 7);
     }
 
-    public void scrollLeft(ActionEvent e) {
+    public void scrollLeft() {
         populateFields(index + 7);
     }
 
