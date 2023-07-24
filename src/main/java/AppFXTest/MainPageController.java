@@ -20,6 +20,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMultipart;
 import java.text.SimpleDateFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class MainPageController {
     int index;
     public List<Message> listOfMessages;
     @FXML
+    private TextField searchField;
+    @FXML
     private TextField address1, date1, sub1;
     @FXML
     private TextField address2, date2, sub2;
@@ -58,6 +61,23 @@ public class MainPageController {
     private TextField address6, date6, sub6;
     @FXML
     private TextField address7, date7, sub7;
+
+    public void search() throws MessagingException {
+        String searchPhrase = searchField.getText();
+        System.out.println(searchPhrase);
+        List<Message> matchingMessages = new ArrayList<>();
+        for (int i = searchPhrase.length(); i >= 3; i--) {
+            for (int j = listOfMessages.size() - 1; j >= listOfMessages.size()-100; j--) {
+                if (listOfMessages.get(j).getSubject().contains(searchPhrase)) {
+                    matchingMessages.add(listOfMessages.get(j));
+                }
+            }
+            searchPhrase = searchPhrase.substring(0, i);
+        }
+        for (int i = 0; i < matchingMessages.size(); i++) {
+            System.out.println(matchingMessages.get(i).getSubject());
+        }
+    }
 
     public void logout(ActionEvent event) {
         Node sourceNode = (Node) event.getSource();

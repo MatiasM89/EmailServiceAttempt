@@ -15,7 +15,7 @@
          </image></ImageView>
       <HBox layoutX="263.0" layoutY="59.0" prefHeight="34.0" prefWidth="514.0">
          <children>
-            <TextField prefHeight="34.0" prefWidth="485.0" promptText="search everything" />
+            <TextField fx:id="searchField" onAction="#search" prefHeight="34.0" prefWidth="485.0" promptText="search everything" />
          </children>
       </HBox>
       <Button fx:id="Send" layoutX="53.0" layoutY="148.0" mnemonicParsing="false" onAction="#sendButton" prefHeight="46.0" prefWidth="81.0" text="Send">

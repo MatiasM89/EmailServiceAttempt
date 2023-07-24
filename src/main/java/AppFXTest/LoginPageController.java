@@ -48,7 +48,6 @@ public class LoginPageController {
             return;
         } catch (Exception e) {
             System.out.println("different exception");
-            e.getStackTrace();
             return;
         }
 
