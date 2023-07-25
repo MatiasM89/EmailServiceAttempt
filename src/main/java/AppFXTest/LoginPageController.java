@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import javax.mail.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,8 +60,9 @@ public class LoginPageController {
         mainPageController.emailAddress = emailAddress;
         mainPageController.password = password;
         mainPageController.listOfMessages = messages;
-        mainPageController.populateFields(messages.size()-1);
-        mainPageController.makeMessageVisible(mainPageController.index-1);
+        mainPageController.listOfMessagesFromReceiveMail = messages;
+        mainPageController.populateFields(messages.size() - 1);
+        mainPageController.makeMessageVisible(mainPageController.index - 1);
 
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

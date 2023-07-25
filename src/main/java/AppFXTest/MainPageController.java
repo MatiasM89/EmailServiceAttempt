@@ -21,6 +21,7 @@ import javax.mail.internet.MimeMultipart;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class MainPageController {
     public String password;
     int index;
     public List<Message> listOfMessages;
+    public List<Message> listOfMessagesFromReceiveMail;
     @FXML
     private TextField searchField;
     @FXML
@@ -67,13 +69,18 @@ public class MainPageController {
         System.out.println(searchPhrase);
         List<Message> matchingMessages = new ArrayList<>();
         for (int i = searchPhrase.length(); i >= 3; i--) {
-            for (int j = listOfMessages.size() - 1; j >= listOfMessages.size()-100; j--) {
+            for (int j = listOfMessages.size() - 1; j >= listOfMessages.size() - 100; j--) {
                 if (listOfMessages.get(j).getSubject().contains(searchPhrase)) {
                     matchingMessages.add(listOfMessages.get(j));
                 }
             }
             searchPhrase = searchPhrase.substring(0, i);
         }
+        Collections.reverse(matchingMessages);
+        listOfMessages = matchingMessages;
+        populateFields(matchingMessages.size() - 1);
+        //setCursorsToPopulatedFields();
+
         for (int i = 0; i < matchingMessages.size(); i++) {
             System.out.println(matchingMessages.get(i).getSubject());
         }
@@ -99,60 +106,94 @@ public class MainPageController {
     }
 
     public void populateFields(int index) {
-        System.out.println(listOfMessages.size() + " " + index);
 
-        if (index > listOfMessages.size()) {
+        if (index > listOfMessages.size() || index - 2 < 0) {
             return;
         }
         this.index = index;
         try {
-            Message message1 = listOfMessages.get(index - 2);
+            try {
+                Message message1 = listOfMessages.get(index - 2);
 
-            address1.setText(getSenderEmailAddress(message1));
-            date1.setText(getSentDateAsString(message1));
-            sub1.setText(message1.getSubject());
+                address1.setText(getSenderEmailAddress(message1));
+                date1.setText(getSentDateAsString(message1));
+                sub1.setText(message1.getSubject());
+            } catch (IndexOutOfBoundsException e) {
+                address1.setText("");
+                date1.setText("");
+                sub1.setText("");
+            }
 
+            try {
+                Message message2 = listOfMessages.get(index - 3);
 
-            Message message2 = listOfMessages.get(index - 3);
+                address2.setText(getSenderEmailAddress(message2));
+                date2.setText(getSentDateAsString(message2));
+                sub2.setText(message2.getSubject());
+            } catch (IndexOutOfBoundsException e) {
+                address2.setText("");
+                date2.setText("");
+                sub2.setText("");
+            }
 
-            address2.setText(getSenderEmailAddress(message2));
-            date2.setText(getSentDateAsString(message2));
-            sub2.setText(message2.getSubject());
+            try {
+                Message message3 = listOfMessages.get(index - 4);
 
+                address3.setText(getSenderEmailAddress(message3));
+                date3.setText(getSentDateAsString(message3));
+                sub3.setText(message3.getSubject());
+            } catch (IndexOutOfBoundsException e) {
+                address3.setText("");
+                date3.setText("");
+                sub3.setText("");
+            }
 
-            Message message3 = listOfMessages.get(index - 4);
+            try {
+                Message message4 = listOfMessages.get(index - 5);
 
-            address3.setText(getSenderEmailAddress(message3));
-            date3.setText(getSentDateAsString(message3));
-            sub3.setText(message3.getSubject());
+                address4.setText(getSenderEmailAddress(message4));
+                date4.setText(getSentDateAsString(message4));
+                sub4.setText(message4.getSubject());
+            } catch (IndexOutOfBoundsException e) {
+                address4.setText("");
+                date4.setText("");
+                sub4.setText("");
+            }
+            try {
+                Message message5 = listOfMessages.get(index - 6);
 
+                address5.setText(getSenderEmailAddress(message5));
+                date5.setText(getSentDateAsString(message5));
+                sub5.setText(message5.getSubject());
+            } catch (IndexOutOfBoundsException e) {
+                address5.setText("");
+                date5.setText("");
+                sub5.setText("");
+            }
 
-            Message message4 = listOfMessages.get(index - 5);
+            try {
+                Message message6 = listOfMessages.get(index - 7);
 
-            address4.setText(getSenderEmailAddress(message4));
-            date4.setText(getSentDateAsString(message4));
-            sub4.setText(message4.getSubject());
+                address6.setText(getSenderEmailAddress(message6));
+                date6.setText(getSentDateAsString(message6));
+                sub6.setText(message6.getSubject());
+            } catch (IndexOutOfBoundsException e) {
+                address6.setText("");
+                date6.setText("");
+                sub6.setText("");
+            }
 
+            try {
+                Message message7 = listOfMessages.get(index - 8);
 
-            Message message5 = listOfMessages.get(index - 6);
-
-            address5.setText(getSenderEmailAddress(message5));
-            date5.setText(getSentDateAsString(message5));
-            sub5.setText(message5.getSubject());
-
-
-            Message message6 = listOfMessages.get(index - 7);
-
-            address6.setText(getSenderEmailAddress(message6));
-            date6.setText(getSentDateAsString(message6));
-            sub6.setText(message6.getSubject());
-
-
-            Message message7 = listOfMessages.get(index - 8);
-
-            address7.setText(getSenderEmailAddress(message7));
-            date7.setText(getSentDateAsString(message7));
-            sub7.setText(message7.getSubject());
+                address7.setText(getSenderEmailAddress(message7));
+                date7.setText(getSentDateAsString(message7));
+                sub7.setText(message7.getSubject());
+            } catch (IndexOutOfBoundsException e) {
+                address7.setText("");
+                date7.setText("");
+                sub7.setText("");
+            }
 
             setCursorsToPopulatedFields();
 
@@ -178,6 +219,7 @@ public class MainPageController {
         sub6.setCursor(Cursor.HAND);
         sub7.setCursor(Cursor.HAND);
     }
+
 
     public void makeMessageVisible(int index) {
         Message msg = listOfMessages.get(index - 1);
