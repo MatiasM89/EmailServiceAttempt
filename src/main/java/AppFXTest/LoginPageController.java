@@ -61,8 +61,10 @@ public class LoginPageController {
         mainPageController.password = password;
         mainPageController.listOfMessages = messages;
         mainPageController.listOfMessagesFromReceiveMail = messages;
+        mainPageController.searchButton.setDisable(true);
+        mainPageController.searchButton.setVisible(false);
         mainPageController.populateFields(messages.size() - 1);
-        mainPageController.makeMessageVisible(mainPageController.index - 1);
+        mainPageController.makeMessageVisible(mainPageController.index);
 
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

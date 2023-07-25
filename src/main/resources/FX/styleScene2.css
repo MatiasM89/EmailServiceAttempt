@@ -18,6 +18,17 @@
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
 }
+#searchButton{
+    -fx-font-family: "Open Sans";
+    -fx-font-size: 12;
+    -fx-background-color: #B9B8D3;
+    -fx-background-radius: 6;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+#searchButton:hover{
+    -fx-background-color: #8F8EB8;
+}
 #left:hover{
     -fx-background-color: #8F8EB8;
 }
@@ -59,6 +70,7 @@
     -fx-font-weight: bold;
     -fx-background-color: #CDCDE0;
     -fx-border-radius: 5px;
+    -fx-font-size: 16;
 }
 #emailBody .textPrompt {
     -fx-alignment: center;

@@ -16,6 +16,7 @@
       <HBox layoutX="263.0" layoutY="59.0" prefHeight="34.0" prefWidth="514.0">
          <children>
             <TextField fx:id="searchField" onAction="#search" prefHeight="34.0" prefWidth="485.0" promptText="search everything" />
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#cancelSearch" prefHeight="38.0" prefWidth="41.0" text="X" />
          </children>
       </HBox>
       <Button fx:id="Send" layoutX="53.0" layoutY="148.0" mnemonicParsing="false" onAction="#sendButton" prefHeight="46.0" prefWidth="81.0" text="Send">
@@ -139,5 +140,9 @@
             <Button fx:id="left" mnemonicParsing="false" onAction="#scrollLeft" prefHeight="37.0" prefWidth="37.0" text="&lt;" />
             <Button fx:id="right" mnemonicParsing="false" onAction="#scrollRight" prefHeight="37.0" prefWidth="37.0" text="&gt;" />
          </children></HBox>
+      <Label fx:id="noResultsText" layoutX="263.0" layoutY="93.0" prefHeight="17.0" prefWidth="138.0" text="No results found!" textFill="RED" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>

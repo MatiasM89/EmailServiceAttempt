@@ -1,13 +1,12 @@
 package AppFXTest;
 
 import Email.EmailSender;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -27,7 +26,6 @@ import java.util.List;
 
 public class MainPageController {
 
-
     @FXML
     private TextArea emailBody;
     @FXML
@@ -39,8 +37,6 @@ public class MainPageController {
     @FXML
     public TextField from;
     @FXML
-    private Button logout;
-    @FXML
     public TextArea selectedMailText;
     public String emailAddress;
     public String password;
@@ -49,6 +45,10 @@ public class MainPageController {
     public List<Message> listOfMessagesFromReceiveMail;
     @FXML
     private TextField searchField;
+    @FXML
+    public Button searchButton;
+    @FXML
+    public Label noResultsText;
     @FXML
     private TextField address1, date1, sub1;
     @FXML
@@ -66,8 +66,14 @@ public class MainPageController {
 
     public void search() throws MessagingException {
         String searchPhrase = searchField.getText();
-        System.out.println(searchPhrase);
+        listOfMessages = listOfMessagesFromReceiveMail;
+
+        searchButton.setDisable(false);
+        searchButton.setVisible(true);
+        noResultsText.setVisible(false);
+
         List<Message> matchingMessages = new ArrayList<>();
+
         for (int i = searchPhrase.length(); i >= 3; i--) {
             for (int j = listOfMessages.size() - 1; j >= listOfMessages.size() - 100; j--) {
                 if (listOfMessages.get(j).getSubject().contains(searchPhrase)) {
@@ -76,14 +82,26 @@ public class MainPageController {
             }
             searchPhrase = searchPhrase.substring(0, i);
         }
+        if (matchingMessages.isEmpty()) {
+            noResultsText.setVisible(true);
+            listOfMessages = listOfMessagesFromReceiveMail;
+            return;
+        }
         Collections.reverse(matchingMessages);
         listOfMessages = matchingMessages;
         populateFields(matchingMessages.size() - 1);
-        //setCursorsToPopulatedFields();
 
         for (int i = 0; i < matchingMessages.size(); i++) {
             System.out.println(matchingMessages.get(i).getSubject());
         }
+    }
+
+    public void cancelSearch() {
+        searchButton.setDisable(true);
+        searchButton.setVisible(false);
+        noResultsText.setVisible(false);
+        listOfMessages = listOfMessagesFromReceiveMail;
+        populateFields(listOfMessages.size() - 1);
     }
 
     public void logout(ActionEvent event) {
@@ -107,13 +125,13 @@ public class MainPageController {
 
     public void populateFields(int index) {
 
-        if (index > listOfMessages.size() || index - 2 < 0) {
+        if (index > listOfMessages.size() || index < 0) {
             return;
         }
         this.index = index;
         try {
             try {
-                Message message1 = listOfMessages.get(index - 2);
+                Message message1 = listOfMessages.get(index);
 
                 address1.setText(getSenderEmailAddress(message1));
                 date1.setText(getSentDateAsString(message1));
@@ -125,7 +143,7 @@ public class MainPageController {
             }
 
             try {
-                Message message2 = listOfMessages.get(index - 3);
+                Message message2 = listOfMessages.get(index - 1);
 
                 address2.setText(getSenderEmailAddress(message2));
                 date2.setText(getSentDateAsString(message2));
@@ -137,7 +155,7 @@ public class MainPageController {
             }
 
             try {
-                Message message3 = listOfMessages.get(index - 4);
+                Message message3 = listOfMessages.get(index - 2);
 
                 address3.setText(getSenderEmailAddress(message3));
                 date3.setText(getSentDateAsString(message3));
@@ -149,7 +167,7 @@ public class MainPageController {
             }
 
             try {
-                Message message4 = listOfMessages.get(index - 5);
+                Message message4 = listOfMessages.get(index - 3);
 
                 address4.setText(getSenderEmailAddress(message4));
                 date4.setText(getSentDateAsString(message4));
@@ -159,8 +177,9 @@ public class MainPageController {
                 date4.setText("");
                 sub4.setText("");
             }
+
             try {
-                Message message5 = listOfMessages.get(index - 6);
+                Message message5 = listOfMessages.get(index - 4);
 
                 address5.setText(getSenderEmailAddress(message5));
                 date5.setText(getSentDateAsString(message5));
@@ -172,7 +191,7 @@ public class MainPageController {
             }
 
             try {
-                Message message6 = listOfMessages.get(index - 7);
+                Message message6 = listOfMessages.get(index - 5);
 
                 address6.setText(getSenderEmailAddress(message6));
                 date6.setText(getSentDateAsString(message6));
@@ -184,7 +203,7 @@ public class MainPageController {
             }
 
             try {
-                Message message7 = listOfMessages.get(index - 8);
+                Message message7 = listOfMessages.get(index - 6);
 
                 address7.setText(getSenderEmailAddress(message7));
                 date7.setText(getSentDateAsString(message7));
@@ -222,7 +241,7 @@ public class MainPageController {
 
 
     public void makeMessageVisible(int index) {
-        Message msg = listOfMessages.get(index - 1);
+        Message msg = listOfMessages.get(index);
         try {
             Object content = msg.getContent();
             if (content instanceof MimeMultipart) {
@@ -277,7 +296,10 @@ public class MainPageController {
     public void clickHeader(MouseEvent event) {
         TextField sourceTextField = (TextField) event.getSource();
         int j = getIndexFromTextField(sourceTextField);
-        makeMessageVisible(index - j);
-    }
+        try {
+            makeMessageVisible(index - j + 1);
+        } catch (IndexOutOfBoundsException e) {
 
+        }
+    }
 }
